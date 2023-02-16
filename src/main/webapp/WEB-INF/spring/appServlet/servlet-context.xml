@@ -41,9 +41,12 @@
 	<beans:bean class="article.model.Article" id="article">
 		<beans:property name="read_cnt" ref="writer" value="0"></beans:property>
 	</beans:bean> -->
+	
+	<!-- controller bean 추가 -->
+	<!-- <beans:bean class="com.mycom.member.controller.MainController"/> -->
 		
 	<!-- controller파일의 위치를 설정 -->
-	<context:component-scan base-package="com.mycom.app" />
+	<context:component-scan base-package="com.mycom.*" />
 	
 	<!-- 인터셉터 클래스(bean) 등록 -->
 	<interceptors>
@@ -52,11 +55,14 @@
 	</interceptors>
 	
 	<!-- db 연동과 관련된 클래스(bean) 등록 -->
+	<!-- Datasource 객체가 필요한이유
+	스프링 jdbc가 jdbc api를 사용하여 db에 접속하려면 드라이버로딩, db에접소그 커넥션객체를 받아오는 순서가 필요하다.
+	따라서 datasource를 db에 연결해야하기때문에 datasource 객체를 bean으로 등록해야한다 -->
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
        <beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>  
-       <beans:property name="url" value="jdbc:mysql://localhost:3306/board?serverTimezone=UTC"/> 
-       <beans:property name="username" value="jspexam"/> 
-       <beans:property name="password" value="jsppw"/>  
+       <beans:property name="url" value="jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"/> 
+       <beans:property name="username" value="spuser"/> 
+       <beans:property name="password" value="asdf123"/>  
    </beans:bean>
    <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
        <beans:property name="dataSource" ref="dataSource"/>

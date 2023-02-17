@@ -7,7 +7,16 @@ public class SimpleMember {
 	private String gender;
 	private String regdate;
 	
+	public SimpleMember() {};
 	
+	public SimpleMember(String id, String pw, String name, String gender, String regdate) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.gender = gender;
+		this.regdate = regdate;
+	}
 	
 	public String getId() {
 		return id;
